@@ -39,5 +39,8 @@
     "react-contextmenu": "^2.13.0",
     "react-markdown": "^4.3.1",
     "react-pdf": "^4.1.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }
