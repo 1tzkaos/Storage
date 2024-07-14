@@ -20,7 +20,7 @@ class Register extends React.Component {
 
   register = () => {
     axios
-      .post(`http://localhost:${config.port}/register`, {
+      .post(`http://localhost:${2000}/register`, {
         username: this.state.username,
         password: this.state.password,
       })

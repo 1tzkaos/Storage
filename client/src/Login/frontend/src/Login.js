@@ -25,7 +25,7 @@ class Login extends React.Component {
     const pwd = bcrypt.hashSync(this.state.password, salt);
 
     axios
-      .post(`http://localhost:${config.port}/login`, {
+      .post(`http://localhost:${2000}/login`, {
         username: this.state.username,
         password: pwd,
       })
