@@ -31,6 +31,16 @@ app.use(function (req, res, next) {
   }
 });
 
+// Add the ensureAuthenticated middleware function here
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    // Redirect to login page if not authenticated
+    res.redirect("/login");
+  }
+}
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(__dirname + "/client/build"));
   app.get("*", (req, res, next) => {

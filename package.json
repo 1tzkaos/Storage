@@ -1,9 +1,9 @@
 {
   "scripts": {
     "server": "NODE_ENV=production nodemon app.js",
-    "install-dep": "yarn install && cd client && yarn install && cd ../",
-    "client": "cd client && yarn start",
-    "dev": "concurrently -n 'server,client' -c 'red,green'  \"nodemon app.js\" \"cd client && yarn start\"",
+    "install-dep": "yarn install && cd client && yarn install && cd src && cd login && cd backend ** npm install && cd ../ && cd frontend && npm install && cd ../../../../",
+    "client": "cd client && yarn start && cd src/login/backend && node server.js",
+    "dev": "concurrently -n 'server,client' -c 'red,green'  \"nodemon app.js\" \"cd client && yarn start && cd src/login/backend && node server.js\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
