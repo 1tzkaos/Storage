@@ -5,7 +5,7 @@ import { withRouter } from "./utils";
 const axios = require("axios");
 var fs = require("fs");
 
-var config = JSON.parse(fs.readFileSync("../../../../../config.json", "utf8"));
+var config = JSON.parse(fs.readFileSync("config.json", "utf8"));
 class Register extends React.Component {
   constructor(props) {
     super(props);

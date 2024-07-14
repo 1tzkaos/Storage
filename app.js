@@ -225,5 +225,5 @@ function checkUserAndGenerateToken(data, req, res) {
 }
 
 app.listen(config.port, () => {
-  console.log("Server is Running On port " + config.port);
+  console.log("Server is Running On Port " + config.port);
 });

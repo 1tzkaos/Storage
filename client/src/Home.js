@@ -362,6 +362,7 @@ class Home extends Component {
           message.success(`${this.state.name} folder uploaded successfully`);
         } else {
           message.error(`Folder upload failed.`);
+          console.log(data.err);
         }
 
         this.setState({

@@ -8,8 +8,7 @@ var salt = bcrypt.genSaltSync(10);
 
 var fs = require("fs");
 
-let config = JSON.parse(fs.readFileSync("../../../../../config.json", "utf8"));
-
+var config = JSON.parse(fs.readFileSync("config.json", "utf8"));
 class Login extends React.Component {
   constructor(props) {
     super(props);
