@@ -10,8 +10,6 @@ var fs = require("fs");
 
 let config = JSON.parse(fs.readFileSync("../../../../../config.json", "utf8"));
 
-import "./Login.css";
-
 class Login extends React.Component {
   constructor(props) {
     super(props);

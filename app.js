@@ -90,10 +90,6 @@ let db = mongoose.connection;
 db.once("open", () => console.log("connected to the database"));
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-app.listen(process.env.PORT || config.port, () => {
-  console.log("listening on", config.port);
-});
-
 app.use("/", (req, res, next) => {
   try {
     if (req.path == "/login" || req.path == "/register" || req.path == "/") {
@@ -228,6 +224,6 @@ function checkUserAndGenerateToken(data, req, res) {
   );
 }
 
-app.listen(2000, () => {
-  console.log("Server is Running On port " + 2000);
+app.listen(config.port, () => {
+  console.log("Server is Running On port " + config.port);
 });
