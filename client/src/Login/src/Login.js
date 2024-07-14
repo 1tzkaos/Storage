@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import swal from "sweetalert";
 import { Button, TextField, Link } from "@material-ui/core";
-import { withRouter } from "./utils";
+// import { withRouter } from "./utils";
+import "./Login.css";
 const axios = require("axios");
 const bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(10);
@@ -9,7 +10,6 @@ var salt = bcrypt.genSaltSync(10);
 var fs = require("fs");
 
 var config = JSON.parse(fs.readFileSync("config.json", "utf8"));
-import "./Login.css";
 
 class Login extends React.Component {
   constructor(props) {
@@ -109,4 +109,4 @@ class Login extends React.Component {
   }
 }
 
-export default withRouter(Login);
+export default Login;
