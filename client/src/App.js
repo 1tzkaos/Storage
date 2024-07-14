@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import Home from "./Home";
 import Note from "./Note";
 
-// import Login from "./Login/frontend/src/Login";
-// import Register from "./Login/frontend/src/Register";
+// import Login from "./Login/src/Login";
+// import Register from "./Login/src/Register";
 // import "./Login/frontend/src/login.css";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";

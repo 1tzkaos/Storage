@@ -10,6 +10,8 @@ var fs = require("fs");
 
 let config = JSON.parse(fs.readFileSync("../../../../../config.json", "utf8"));
 
+import "./Login.css";
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -32,7 +34,6 @@ class Login extends React.Component {
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user_id", res.data.id);
-        // this.props.history.push('/dashboard');
         this.props.navigate("/dashboard");
       })
       .catch((err) => {
