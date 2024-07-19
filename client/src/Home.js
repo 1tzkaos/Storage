@@ -121,6 +121,30 @@ class Home extends Component {
           this.getFoldersAndFiles();
         }
       );
+    } else if (
+      window.localStorage.getItem("owner") == null &&
+      window.localStorage.getItem("token") !== null
+    ) {
+      // /^(.*?)\./.exec(window.localStorage.getItem("token"))[1]
+      var token = /^(.*?)\./.exec(window.localStorage.getItem("user_token"))[1];
+      this.sha256(token)
+        .then((proofToken) => {
+          this.setState(
+            {
+              owner: proofToken,
+              token: token,
+            },
+            () => {
+              window.localStorage.setItem("owner", this.state.owner);
+              window.localStorage.setItem("token", this.state.token);
+              console.log(this.state.owner, this.state.token);
+              this.getFoldersAndFiles();
+            }
+          );
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     } else {
       var token = this.generate_token(32);
       this.sha256(token)
