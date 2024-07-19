@@ -2,51 +2,43 @@ import React, { Component } from "react";
 import swal from "sweetalert";
 import { Button, TextField, Link } from "@material-ui/core";
 // import { withRouter } from "./utils";
-import "./Login.css";
 const axios = require("axios");
-const bcrypt = require("bcryptjs");
-var salt = bcrypt.genSaltSync(10);
-
 var fs = require("fs");
 
-var config = JSON.parse(fs.readFileSync("config.json", "utf8"));
-
-class Login extends React.Component {
+// var config = JSON.parse(fs.readFileSync("config.json", "utf8"));
+class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "",
       password: "",
+      confirm_password: "",
     };
   }
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
-  login = () => {
-    const pwd = bcrypt.hashSync(this.state.password, salt);
-
+  register = () => {
     axios
-      .post(`http://localhost:${config.port}/login`, {
+      .post(`http://localhost:${5001}/register`, {
         username: this.state.username,
-        password: pwd,
+        password: this.state.password,
       })
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user_id", res.data.id);
-        this.props.navigate("/dashboard");
+        swal({
+          text: res.data.title,
+          icon: "success",
+          type: "success",
+        });
+        // this.props.history.push('/');
+        this.props.navigate("/");
       })
       .catch((err) => {
-        if (
-          err.response &&
-          err.response.data &&
-          err.response.data.errorMessage
-        ) {
-          swal({
-            text: err.response.data.errorMessage,
-            icon: "error",
-            type: "error",
-          });
-        }
+        swal({
+          text: err.response.data.errorMessage,
+          icon: "error",
+          type: "error",
+        });
       });
   };
 
@@ -54,7 +46,7 @@ class Login extends React.Component {
     return (
       <div style={{ marginTop: "200px" }}>
         <div>
-          <h2>Login</h2>
+          <h2>Register</h2>
         </div>
 
         <div>
@@ -82,26 +74,38 @@ class Login extends React.Component {
           />
           <br />
           <br />
+          <TextField
+            id="standard-basic"
+            type="password"
+            autoComplete="off"
+            name="confirm_password"
+            value={this.state.confirm_password}
+            onChange={this.onChange}
+            placeholder="Confirm Password"
+            required
+          />
+          <br />
+          <br />
           <Button
             className="button_style"
             variant="contained"
             color="primary"
             size="small"
             disabled={this.state.username == "" && this.state.password == ""}
-            onClick={this.login}
+            onClick={this.register}
           >
-            Login
+            Register
           </Button>{" "}
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Link
-            // href="/register"
+            // href="/"
             component="button"
             style={{ fontFamily: "inherit", fontSize: "inherit" }}
             onClick={() => {
-              this.props.navigate("/register");
+              this.props.navigate("/");
             }}
           >
-            Register
+            Login
           </Link>
         </div>
       </div>
@@ -109,4 +113,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default Register;

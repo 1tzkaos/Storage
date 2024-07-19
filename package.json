@@ -9,11 +9,11 @@
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:5001",
-  "name": "merntemplate",
+  "name": "storage",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/0x5eba/MERN-template.git",
-  "author": "Sebastien Biollo <sbiollo@gmail.com>",
+  "repository": "",
+  "author": "Nick Stank 1636",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.0",

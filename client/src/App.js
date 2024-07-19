@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import Home from "./Home";
 import Note from "./Note";
 
-import Login from "./Login/src/Login";
-import Register from "./Login/src/Register";
+import Login from "./Login/Login";
+import Register from "./Login/Register";
 // import "./Login/frontend/src/login.css";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -18,7 +18,7 @@ class App extends Component {
             <Route path="/note" exact component={Note} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/" component={Home} />
+            <PrivateRoute path="/" component={Home} />
           </Switch>
         </Router>
       </div>

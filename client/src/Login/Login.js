@@ -1,44 +1,51 @@
 import React, { Component } from "react";
 import swal from "sweetalert";
 import { Button, TextField, Link } from "@material-ui/core";
+// import fs from "fs";
 // import { withRouter } from "./utils";
+import "./Login.css";
 const axios = require("axios");
-var fs = require("fs");
+const bcrypt = require("bcryptjs");
+let salt = bcrypt.genSaltSync(10);
 
-var config = JSON.parse(fs.readFileSync("config.json", "utf8"));
-class Register extends React.Component {
+// let config = JSON.parse(fs.readFileSync("config.json", "utf8"));
+
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "",
       password: "",
-      confirm_password: "",
     };
   }
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
-  register = () => {
+  login = () => {
+    const pwd = bcrypt.hashSync(this.state.password, salt);
+
     axios
-      .post(`http://localhost:${config.port}/register`, {
+      .post(`http://localhost:${5001}/login`, {
         username: this.state.username,
-        password: this.state.password,
+        password: pwd,
       })
       .then((res) => {
-        swal({
-          text: res.data.title,
-          icon: "success",
-          type: "success",
-        });
-        // this.props.history.push('/');
-        this.props.navigate("/");
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user_id", res.data.id);
+        this.props.navigate("/dashboard");
       })
       .catch((err) => {
-        swal({
-          text: err.response.data.errorMessage,
-          icon: "error",
-          type: "error",
-        });
+        if (
+          err.response &&
+          err.response.data &&
+          err.response.data.errorMessage
+        ) {
+          swal({
+            text: err.response.data.errorMessage,
+            icon: "error",
+            type: "error",
+          });
+        }
       });
   };
 
@@ -46,7 +53,7 @@ class Register extends React.Component {
     return (
       <div style={{ marginTop: "200px" }}>
         <div>
-          <h2>Register</h2>
+          <h2>Login</h2>
         </div>
 
         <div>
@@ -74,38 +81,26 @@ class Register extends React.Component {
           />
           <br />
           <br />
-          <TextField
-            id="standard-basic"
-            type="password"
-            autoComplete="off"
-            name="confirm_password"
-            value={this.state.confirm_password}
-            onChange={this.onChange}
-            placeholder="Confirm Password"
-            required
-          />
-          <br />
-          <br />
           <Button
             className="button_style"
             variant="contained"
             color="primary"
             size="small"
             disabled={this.state.username == "" && this.state.password == ""}
-            onClick={this.register}
+            onClick={this.login}
           >
-            Register
+            Login
           </Button>{" "}
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Link
-            // href="/"
+            // href="/register"
             component="button"
             style={{ fontFamily: "inherit", fontSize: "inherit" }}
             onClick={() => {
-              this.props.navigate("/");
+              this.props.navigate("/register");
             }}
           >
-            Login
+            Register
           </Link>
         </div>
       </div>
@@ -113,4 +108,5 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+// export default withRouter(Login);
+export default Login;
