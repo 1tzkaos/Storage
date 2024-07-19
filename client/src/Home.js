@@ -147,24 +147,7 @@ class Home extends Component {
           console.log(e);
         });
     } else {
-      var token = this.generate_token(32);
-      this.sha256(token)
-        .then((proofToken) => {
-          this.setState(
-            {
-              owner: proofToken,
-              token: token,
-            },
-            () => {
-              window.localStorage.setItem("owner", this.state.owner);
-              window.localStorage.setItem("token", this.state.token);
-              this.getFoldersAndFiles();
-            }
-          );
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+      window.location.href = "/login";
     }
 
     if (window.localStorage.getItem("message1") === null) {
