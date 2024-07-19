@@ -91,7 +91,7 @@ class Register extends Component {
             variant="contained"
             color="primary"
             size="small"
-            disabled={this.state.username == "" && this.state.password == ""}
+            disabled={this.state.username === "" && this.state.password === ""}
             onClick={this.register}
           >
             Register
