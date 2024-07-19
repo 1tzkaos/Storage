@@ -123,7 +123,8 @@ class Home extends Component {
       );
     } else if (
       window.localStorage.getItem("owner") == null &&
-      window.localStorage.getItem("token") !== null
+      window.localStorage.getItem("token") == null &&
+      window.localStorage.getItem("user_token") !== null
     ) {
       // /^(.*?)\./.exec(window.localStorage.getItem("token"))[1]
       var token = /^(.*?)\./.exec(window.localStorage.getItem("user_token"))[1];
