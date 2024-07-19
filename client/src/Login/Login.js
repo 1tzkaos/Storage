@@ -32,7 +32,7 @@ class Login extends Component {
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user_id", res.data.id);
-        this.props.navigate("/");
+        this.props.navigate("/dashboard");
       })
       .catch((err) => {
         if (
@@ -108,5 +108,5 @@ class Login extends Component {
   }
 }
 
+// export default withRouter(Login);
 export default withRouter(Login);
-// export default Login;

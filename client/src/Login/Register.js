@@ -91,7 +91,7 @@ class Register extends Component {
             variant="contained"
             color="primary"
             size="small"
-            disabled={this.state.username === "" && this.state.password == ""}
+            disabled={this.state.username === "" && this.state.password === ""}
             onClick={this.register}
           >
             Register
@@ -102,7 +102,7 @@ class Register extends Component {
             component="button"
             style={{ fontFamily: "inherit", fontSize: "inherit" }}
             onClick={() => {
-              this.props.navigate("/");
+              this.props.navigate("/login");
             }}
           >
             Login
