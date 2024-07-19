@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import swal from "sweetalert";
 import { Button, TextField, Link } from "@material-ui/core";
 // import fs from "fs";
-// import { withRouter } from "./utils";
+import { withRouter } from "./utils";
 import "./Login.css";
 const axios = require("axios");
 const bcrypt = require("bcryptjs");
@@ -32,7 +32,7 @@ class Login extends Component {
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user_id", res.data.id);
-        this.props.navigate("/dashboard");
+        this.props.navigate("/");
       })
       .catch((err) => {
         if (
@@ -108,5 +108,5 @@ class Login extends Component {
   }
 }
 
-// export default withRouter(Login);
-export default Login;
+export default withRouter(Login);
+// export default Login;

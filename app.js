@@ -122,6 +122,12 @@ app.get("/", (req, res) => {
     title: "Apis",
   });
 });
+app.get("/login", (req, res) => {
+  res.status(200).json({
+    status: true,
+    title: "Login API",
+  });
+});
 
 /* login api */
 app.post("/login", (req, res) => {
