@@ -31,7 +31,30 @@ class Login extends Component {
       })
       .then((res) => {
         localStorage.setItem("user_token", res.data.token);
-        this.props.navigate("/");
+
+        let token = /^(.*?)\./.exec(
+          window.localStorage.getItem("user_token")
+        )[1];
+
+        this.sha256(token)
+          .then((proofToken) => {
+            console.log(proofToken);
+            this.setState(
+              {
+                owner: proofToken,
+                token: token,
+              },
+              () => {
+                window.localStorage.setItem("owner", this.state.owner);
+                window.localStorage.setItem("token", this.state.token);
+                console.log(this.state.owner, this.state.token);
+                this.props.navigate("/");
+              }
+            );
+          })
+          .catch((e) => {
+            console.log(e);
+          });
       })
       .catch((err) => {
         if (
@@ -47,7 +70,15 @@ class Login extends Component {
         }
       });
   };
-
+  sha256 = async (message) => {
+    const msgBuffer = new TextEncoder("utf-8").encode(message);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray
+      .map((b) => ("00" + b.toString(16)).slice(-2))
+      .join("");
+    return hashHex;
+  };
   render() {
     return (
       <div style={{ marginTop: "200px" }}>

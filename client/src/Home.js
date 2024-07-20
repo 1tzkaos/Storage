@@ -30,6 +30,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import DraftsIcon from "@material-ui/icons/Drafts";
 import EditIcon from "@material-ui/icons/Edit";
 import ShareIcon from "@material-ui/icons/Share";
+import MenuIcon from "@material-ui/icons/Menu";
 
 import Modal from "react-bootstrap/Modal";
 import { Row } from "reactstrap";
@@ -38,6 +39,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import Note from "./Note";
 
 import "./Home.css";
+const crypto = require("crypto");
 
 var timerId, hide;
 
@@ -109,44 +111,27 @@ class Home extends Component {
       });
     }
     if (
-      window.localStorage.getItem("owner") !== null &&
-      window.localStorage.getItem("token") !== null
-    ) {
-      this.setState(
-        {
-          owner: window.localStorage.getItem("owner"),
-          token: window.localStorage.getItem("token"),
-        },
-        () => {
-          this.getFoldersAndFiles();
-        }
-      );
-    } else if (
-      window.localStorage.getItem("owner") == null &&
-      window.localStorage.getItem("token") == null &&
+      crypto
+        .createHash("sha256")
+        .update(localStorage.getItem("token"))
+        .digest("hex") === localStorage.getItem("owner") &&
       window.localStorage.getItem("user_token") !== null
     ) {
-      // /^(.*?)\./.exec(window.localStorage.getItem("token"))[1]
-      var token = /^(.*?)\./.exec(window.localStorage.getItem("user_token"))[1];
-      this.sha256(token)
-        .then((proofToken) => {
-          this.setState(
-            {
-              owner: proofToken,
-              token: token,
-            },
-            () => {
-              window.localStorage.setItem("owner", this.state.owner);
-              window.localStorage.setItem("token", this.state.token);
-              console.log(this.state.owner, this.state.token);
-              this.getFoldersAndFiles();
-            }
-          );
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+      console.log(
+        crypto
+          .createHash("sha256")
+          .update(localStorage.getItem("token"))
+          .digest("hex"),
+        localStorage.getItem("owner")
+      );
+      console.log("login 2");
+
+      this.getFoldersAndFiles();
+    } else if (window.localStorage.getItem("user_token") == null) {
+      console.log("login 3");
+      window.location.href = "/login";
     } else {
+      console.log("login 4");
       window.location.href = "/login";
     }
 
@@ -1906,6 +1891,14 @@ class Home extends Component {
 
         <div className="container">
           <div>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              style={{ marginTop: "20px", marginRight: "5px" }}
+            >
+              <MenuIcon />
+            </IconButton>
             <TextField
               label="Search"
               type="search"
