@@ -92,6 +92,8 @@ class Home extends Component {
       showModalAccount: false,
       newToken: "",
 
+      showModalMenu: false,
+
       isMobile: window.matchMedia("only screen and (max-width: 760px)").matches,
     };
 
@@ -765,6 +767,7 @@ class Home extends Component {
         showModalFile: false,
         showModalNote: false,
         showModalAccount: false,
+        showModalMenu: false,
       },
       () => {}
     );
@@ -1889,6 +1892,52 @@ class Home extends Component {
           </Modal.Body>
         </Modal>
 
+        {/* show menu modal */}
+        <Modal
+          show={this.state.showModalMenu}
+          onHide={this.closeModal}
+          size="md"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter">
+              Menu{" "}
+              {this.state.name.length > 15
+                ? this.state.name.split("").splice(0, 15).join("") + "..."
+                : this.state.name}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div
+              style={{
+                paddingLeft: "30px",
+                paddingRight: "30px",
+                textAlign: "center",
+              }}
+            >
+              <Button
+                variant="contained"
+                style={{ backgroundColor: "#fbc02d" }}
+                onClick={this.viewFile}
+              >
+                View
+              </Button>
+              <Button
+                variant="contained"
+                style={{
+                  backgroundColor: "#4caf50",
+                  marginLeft: "20px",
+                  marginRight: "20px",
+                }}
+                onClick={this.downloadFile}
+              >
+                Download
+              </Button>
+            </div>
+          </Modal.Body>
+        </Modal>
+
         <div className="container">
           <div>
             <IconButton
@@ -1896,6 +1945,12 @@ class Home extends Component {
               color="inherit"
               aria-label="menu"
               style={{ marginTop: "20px", marginRight: "5px" }}
+              onClick={() =>
+                this.setState({
+                  showModalMenu: true,
+                  newToken: "",
+                })
+              }
             >
               <MenuIcon />
             </IconButton>
