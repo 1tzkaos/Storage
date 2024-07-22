@@ -1,7 +1,6 @@
 const crypto = require("crypto");
 
 exports.proofToken = (req, res, next) => {
-  console.log(req.body);
   if (!req.body.token || !req.body.owner) {
     return res.status(500).send({ err: "No proof given" });
   }
