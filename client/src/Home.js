@@ -44,6 +44,7 @@ import Note from "./Note";
 
 import "./Home.css";
 import ColorSettings from "./Menu/ColorSetting";
+import TodoApp from "./toDo/toDo";
 const crypto = require("crypto");
 
 var timerId, hide;
@@ -1923,6 +1924,7 @@ class Home extends Component {
               }}
             >
               <ColorSettings />
+              <TodoApp />
             </div>
           </Modal.Body>
         </Modal>
