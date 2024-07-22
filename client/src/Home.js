@@ -5,6 +5,9 @@ import {
   UploadOutlined,
   FolderAddOutlined,
   FileAddOutlined,
+  LinkOutlined,
+  DeleteOutlined,
+  EditOutlined,
 } from "@ant-design/icons";
 import "antd/dist/antd.css";
 
@@ -22,6 +25,7 @@ import {
   InputAdornment,
   Checkbox,
 } from "@material-ui/core";
+
 import FolderIcon from "@material-ui/icons/Folder";
 import LockIcon from "@material-ui/icons/Lock";
 import FolderSharedIcon from "@material-ui/icons/FolderShared";
@@ -1346,7 +1350,7 @@ class Home extends Component {
                       }}
                     >
                       <ListItemIcon>
-                        <DraftsIcon fontSize="small" />
+                        <DeleteOutlined fontSize="small" />
                       </ListItemIcon>
                       <Typography variant="inherit" noWrap>
                         Remove
@@ -1389,7 +1393,7 @@ class Home extends Component {
                 }}
               >
                 <ListItemIcon>
-                  <DraftsIcon fontSize="small" />
+                  <LinkOutlined fontSize="small" />
                 </ListItemIcon>
                 <Typography variant="inherit" noWrap>
                   Get shareable link
@@ -1409,7 +1413,7 @@ class Home extends Component {
                     }}
                   >
                     <ListItemIcon>
-                      <DraftsIcon fontSize="small" />
+                      <DeleteOutlined fontSize="small" />
                     </ListItemIcon>
                     <Typography variant="inherit" noWrap>
                       Remove
@@ -1424,7 +1428,7 @@ class Home extends Component {
                 }}
               >
                 <ListItemIcon>
-                  <DraftsIcon fontSize="small" />
+                  <LinkOutlined fontSize="small" />
                 </ListItemIcon>
                 <Typography variant="inherit" noWrap>
                   Get shareable link
@@ -1440,7 +1444,7 @@ class Home extends Component {
                     }}
                   >
                     <ListItemIcon>
-                      <DraftsIcon fontSize="small" />
+                      <EditOutlined fontSize="small" />
                     </ListItemIcon>
                     <Typography variant="inherit" noWrap>
                       Modify
@@ -1462,7 +1466,7 @@ class Home extends Component {
                       }}
                     >
                       <ListItemIcon>
-                        <DraftsIcon fontSize="small" />
+                        <DeleteOutlined fontSize="small" />
                       </ListItemIcon>
                       <Typography variant="inherit" noWrap>
                         Remove
