@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from "react";
-import "./TodoApp.css"; // Import the CSS file
+import {
+  TextField,
+  Button,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton,
+} from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
+import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
+import ReplayIcon from "@material-ui/icons/Replay";
 
 const TodoApp = () => {
   const [todos, setTodos] = useState(
@@ -15,7 +26,7 @@ const TodoApp = () => {
     localStorage.setItem("completedTodos", JSON.stringify(completedTodos));
   }, [todos, completedTodos]);
 
-  const addTodo = () => { 
+  const addTodo = () => {
     setTodos([...todos, input]);
     setInput("");
   };
@@ -33,42 +44,64 @@ const TodoApp = () => {
     setCompletedTodos([...completedTodos, ...completedTodo]);
   };
 
+  const uncompleteTodo = (index) => {
+    const newCompletedTodos = [...completedTodos];
+    const uncompletedTodo = newCompletedTodos.splice(index, 1);
+    setCompletedTodos(newCompletedTodos);
+    setTodos([...todos, ...uncompletedTodo]);
+  };
+
   return (
-    <div className="todo-app">
-      <input
-        className="todo-input"
+    <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+      <TextField
+        fullWidth
+        label="New Todo"
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
-      <button className="todo-button" onClick={addTodo}>
+      <Button variant="contained" color="primary" onClick={addTodo}>
         Add
-      </button>
-      <div className="todo-lists">
-        <ul className="todo-list">
-          {todos.map((todo, index) => (
-            <li key={index} className="todo-item">
-              {todo}
-              <button className="todo-button" onClick={() => removeTodo(index)}>
-                Remove
-              </button>
-              <button
-                className="todo-button"
+      </Button>
+      <List>
+        {todos.map((todo, index) => (
+          <ListItem key={index}>
+            <ListItemText primary={todo} />
+            <ListItemSecondaryAction>
+              <IconButton
+                edge="end"
+                aria-label="delete"
+                onClick={() => removeTodo(index)}
+              >
+                <DeleteIcon />
+              </IconButton>
+              <IconButton
+                edge="end"
+                aria-label="complete"
                 onClick={() => completeTodo(index)}
               >
-                Complete
-              </button>
-            </li>
-          ))}
-        </ul>
-        <h2 className="todo-heading">Completed Todos</h2>
-        <ul className="todo-list">
-          {completedTodos.map((todo, index) => (
-            <li key={index} className="todo-item">
-              {todo}
-            </li>
-          ))}
-        </ul>
-      </div>
+                <CheckCircleOutlineIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+        ))}
+      </List>
+      <h2>Completed Todos</h2>
+      <List>
+        {completedTodos.map((todo, index) => (
+          <ListItem key={index}>
+            <ListItemText primary={todo} />
+            <ListItemSecondaryAction>
+              <IconButton
+                edge="end"
+                aria-label="uncomplete"
+                onClick={() => uncompleteTodo(index)}
+              >
+                <ReplayIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+        ))}
+      </List>
     </div>
   );
 };
