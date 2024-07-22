@@ -11,12 +11,18 @@ function ColorSettings() {
     const savedColor = window.localStorage.getItem("textColor");
     return savedColor ? JSON.parse(savedColor) : "#000000";
   });
+  const [folderColor, setFolderColor] = useState(() => {
+    const savedColor = window.localStorage.getItem("folderColor");
+    return savedColor ? JSON.parse(savedColor) : "#000000";
+  });
 
   useEffect(() => {
     window.localStorage.setItem("bgColor", JSON.stringify(bgColor));
     window.localStorage.setItem("textColor", JSON.stringify(textColor));
+    window.localStorage.setItem("folderColor", JSON.stringify(folderColor));
     document.body.style.backgroundColor = bgColor;
     document.body.style.color = textColor;
+    document.body.style.folderColor = folderColor;
   }, [bgColor, textColor]);
 
   return (
@@ -33,6 +39,13 @@ function ColorSettings() {
         type="color"
         value={textColor}
         onChange={(event) => setTextColor(event.target.value)}
+        style={{ width: "5rem", height: "5rem" }}
+      />
+      <TextField
+        label="Folder Color"
+        type="color"
+        value={folderColor}
+        onChange={(event) => setFolderColor(event.target.value)}
         style={{ width: "5rem", height: "5rem" }}
       />
     </div>

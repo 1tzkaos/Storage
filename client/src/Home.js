@@ -43,7 +43,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import Note from "./Note";
 
 import "./Home.css";
-import ColorSettings from "./ColorSetting";
+import ColorSettings from "./Menu/ColorSetting";
 const crypto = require("crypto");
 
 var timerId, hide;
@@ -2119,6 +2119,7 @@ class Home extends Component {
                       <Button
                         variant="contained"
                         className="buttons-folders"
+                        color="inherit"
                         style={{
                           textTransform: "none",
                           backgroundColor: "white",

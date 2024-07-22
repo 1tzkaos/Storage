@@ -7,7 +7,7 @@ import Register from "./Login/Register";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute"; // Import PrivateRoute
-import ColorSettings from "./ColorSetting";
+import TodoApp from "./toDo/toDo";
 
 class App extends Component {
   render() {
@@ -18,7 +18,7 @@ class App extends Component {
             <Route path="/note" exact component={Note} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
-            <Route path="/test" component={ColorSettings} />
+            <Route path="/todo" component={TodoApp} />
             <Route path="/" component={Home} />
           </Switch>
         </Router>
