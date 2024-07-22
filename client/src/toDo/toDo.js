@@ -52,56 +52,80 @@ const TodoApp = () => {
   };
 
   return (
-    <div style={{ maxWidth: "600px", margin: "0 auto" }}>
-      <TextField
-        fullWidth
-        label="New Todo"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <Button variant="contained" color="primary" onClick={addTodo}>
-        Add
-      </Button>
-      <List>
-        {todos.map((todo, index) => (
-          <ListItem key={index}>
-            <ListItemText primary={todo} />
-            <ListItemSecondaryAction>
-              <IconButton
-                edge="end"
-                aria-label="delete"
-                onClick={() => removeTodo(index)}
-              >
-                <DeleteIcon />
-              </IconButton>
-              <IconButton
-                edge="end"
-                aria-label="complete"
-                onClick={() => completeTodo(index)}
-              >
-                <CheckCircleOutlineIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
-        ))}
-      </List>
-      <h2>Completed Todos</h2>
-      <List>
-        {completedTodos.map((todo, index) => (
-          <ListItem key={index}>
-            <ListItemText primary={todo} />
-            <ListItemSecondaryAction>
-              <IconButton
-                edge="end"
-                aria-label="uncomplete"
-                onClick={() => uncompleteTodo(index)}
-              >
-                <ReplayIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
-        ))}
-      </List>
+    <div
+      style={{
+        maxWidth: "600px",
+        margin: "0 auto",
+
+        justifyContent: "space-between",
+      }}
+    >
+      <div>
+        <TextField
+          fullWidth
+          label="New Todo"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <Button variant="contained" color="primary" onClick={addTodo}>
+          Add
+        </Button>
+      </div>
+      <div
+        style={{
+          maxWidth: "600px",
+          margin: "0 auto",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <div>
+          <h2>Uncompleted Todos</h2>
+          <List>
+            {todos.map((todo, index) => (
+              <ListItem key={index}>
+                <ListItemText primary={todo} />
+                <ListItemSecondaryAction>
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={() => removeTodo(index)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                  <IconButton
+                    edge="end"
+                    aria-label="complete"
+                    onClick={() => completeTodo(index)}
+                  >
+                    <CheckCircleOutlineIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+            ))}
+          </List>
+        </div>
+
+        <div>
+          <h2>Completed Todos</h2>
+          <List>
+            {completedTodos.map((todo, index) => (
+              <ListItem key={index}>
+                <ListItemText primary={todo} />
+                <ListItemSecondaryAction>
+                  <IconButton
+                    edge="end"
+                    aria-label="uncomplete"
+                    onClick={() => uncompleteTodo(index)}
+                  >
+                    <ReplayIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+            ))}
+          </List>
+        </div>
+      </div>
     </div>
   );
 };
