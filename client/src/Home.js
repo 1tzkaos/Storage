@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 
 import { Upload, message, Input as InputAntd } from "antd";
 import {
@@ -39,6 +39,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import Note from "./Note";
 
 import "./Home.css";
+import ColorSettings from "./ColorSetting";
 const crypto = require("crypto");
 
 var timerId, hide;
@@ -1916,24 +1917,7 @@ class Home extends Component {
                 textAlign: "center",
               }}
             >
-              <Button
-                variant="contained"
-                style={{ backgroundColor: "#fbc02d" }}
-                onClick={this.viewFile}
-              >
-                View
-              </Button>
-              <Button
-                variant="contained"
-                style={{
-                  backgroundColor: "#4caf50",
-                  marginLeft: "20px",
-                  marginRight: "20px",
-                }}
-                onClick={this.downloadFile}
-              >
-                Download
-              </Button>
+              <ColorSettings />
             </div>
           </Modal.Body>
         </Modal>
@@ -1976,6 +1960,7 @@ class Home extends Component {
             />
 
             <IconButton
+              color="inherit"
               onClick={() =>
                 this.setState({
                   showModalAccount: true,
