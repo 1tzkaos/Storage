@@ -128,7 +128,8 @@ class Home extends Component {
         localStorage.getItem("owner")
       );
       console.log("login 2");
-
+      this.state.owner = localStorage.getItem("owner");
+      this.state.token = localStorage.getItem("token");
       this.getFoldersAndFiles();
     } else if (window.localStorage.getItem("user_token") == null) {
       console.log("login 3");
