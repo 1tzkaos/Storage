@@ -1496,7 +1496,7 @@ class Home extends Component {
                 }}
               >
                 <ListItemIcon>
-                  <DraftsIcon fontSize="small" />
+                  <LinkOutlined fontSize="small" />
                 </ListItemIcon>
                 <Typography variant="inherit" noWrap>
                   Get shareable link
