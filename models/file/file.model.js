@@ -18,24 +18,44 @@ const FileModel = new mongoose.Schema({
 
 const File = mongoose.model("File", FileModel, "File");
 
-var config = JSON.parse(fs.readFileSync("config.json", "utf8"));
+let config = JSON.parse(fs.readFileSync("config.json", "utf8"));
 const Grid = require("gridfs-stream");
+const multer = require("multer");
 const mongoURI = "mongodb://localhost:27017/" + config.name;
+
 mongoose.createConnection(mongoURI);
-var conn = mongoose.connection;
-var gfs;
-conn.once("open", () => {
+const conn = mongoose.createConnection(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+let gfs;
+
+conn.on("error", console.error.bind(console, "connection error:"));
+conn.once("open", function () {
+  console.log("Database connection successful");
   gfs = Grid(conn.db, mongoose.mongo);
   gfs.collection("uploads");
 });
 
 exports.uploadFile = (fileData) => {
   return new Promise((resolve, reject) => {
-    const file = new File(fileData);
-    file.save(function (err, newfile) {
-      if (err) return reject(err);
-      resolve(newfile);
-    });
+    if (!conn.readyState) {
+      conn.once("open", multer({ upload }));
+    } else {
+      multer({ upload });
+    }
+
+    function upload() {
+      if (!gfs) {
+        return reject(new Error("GridFS is not initialized"));
+      }
+
+      const file = new File(fileData);
+      file.save(function (err, newfile) {
+        if (err) return reject(err);
+        resolve(newfile);
+      });
+    }
   });
 };
 
