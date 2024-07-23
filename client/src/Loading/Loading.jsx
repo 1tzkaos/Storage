@@ -5,6 +5,7 @@ const LoadingPage = () => {
   return (
     <div id="loader-container">
       <svg
+        id="loader"
         width="704"
         height="77"
         viewBox="0 0 704 77"
