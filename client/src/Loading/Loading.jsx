@@ -1,7 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { Component } from "react";
 
 import "./Loading.css";
+
+const crypto = require("crypto");
 const LoadingPage = () => {
+  // const Credentials_Check = () => {
+  //   if (
+  //     crypto
+  //       .createHash("sha256")
+  //       .update(localStorage.getItem("token"))
+  //       .digest("hex") === localStorage.getItem("owner") &&
+  //     window.localStorage.getItem("user_token") !== null
+  //   ) {
+  //     console.log(
+  //       crypto
+  //         .createHash("sha256")
+  //         .update(localStorage.getItem("token"))
+  //         .digest("hex"),
+  //       localStorage.getItem("owner")
+  //     );
+  //     console.log("login 2");
+  //     this.state.owner = localStorage.getItem("owner");
+  //     this.state.token = localStorage.getItem("token");
+  //     this.getFoldersAndFiles();
+  //   } else if (window.localStorage.getItem("user_token") == null) {
+  //     console.log("login 3");
+  //     window.location.href = "/login";
+  //   } else {
+  //     console.log("login 4");
+  //     window.location.href = "/login";
+  //   }
+  // };
+
   return (
     <div id="loader-container">
       <svg

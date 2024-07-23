@@ -3,7 +3,7 @@ import swal from "sweetalert";
 import { Button, TextField, Link } from "@material-ui/core";
 import { withRouter } from "./utils";
 const axios = require("axios");
-var fs = require("fs");
+// var fs = require("fs");
 
 // var config = JSON.parse(fs.readFileSync("config.json", "utf8"));
 class Register extends Component {

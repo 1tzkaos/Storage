@@ -13,12 +13,16 @@ import PrivateRoute from "./PrivateRoute"; // Import PrivateRoute
 
 const App = () => {
   const [loading, setLoading] = useState(true);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 3300);
   }, []);
-
-  if (loading) {
+  useEffect(() => {
+    setTimeout(() => setLoaded(true), 3300);
+  }, []);
+  console.log(loaded);
+  if (loading && !loaded) {
     return <LoadingPage />;
   }
 
