@@ -10,18 +10,27 @@ import TodoApp from "./toDo/toDo";
 import LoadingPage from "./Loading/Loading.jsx";
 
 import PrivateRoute from "./PrivateRoute"; // Import PrivateRoute
+const crypto = require("crypto");
 
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 3300);
+    if (!sessionStorage.getItem("hasLoaded")) {
+      setTimeout(() => {
+        setLoading(false);
+        sessionStorage.setItem("hasLoaded", "true");
+      }, 3300);
+    } else {
+      setLoading(false);
+    }
   }, []);
+
   useEffect(() => {
     setTimeout(() => setLoaded(true), 3300);
   }, []);
-  console.log(loaded);
+
   if (loading && !loaded) {
     return <LoadingPage />;
   }
